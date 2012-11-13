@@ -45,7 +45,8 @@ class LunchDecidertron {
 		if (empty($this->options)) {
 			// TODO: Move to config
 			$this->options = array(
-				'Peko Peko' => 50,
+				'Peko Peko' => 75,
+				'Rocket Pizza' => 50,
 				'Not All There' => 0,
 				'Cafe 434' => 100,
 				'Blue Moose' => 100,
