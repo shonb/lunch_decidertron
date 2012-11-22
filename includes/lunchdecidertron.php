@@ -47,12 +47,12 @@ class LunchDecidertron {
 			$this->options = array(
 				'Peko Peko' => 75,
 				'Rocket Pizza' => 50,
-				'Not All There' => 0,
+				'Not All There' => 100,
 				'Cafe 434' => 100,
 				'Blue Moose' => 100,
 				'Soup Place' => 10,
 				'Next to Soup Place' => 10,
-				'Oriental East' => 100,
+				'Orient East' => 100,
 			);
 		}
 	}

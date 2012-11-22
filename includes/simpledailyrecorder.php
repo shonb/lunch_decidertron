@@ -12,7 +12,7 @@ class SimpleDailyRecorder {
 
 	public function get_record($day_of_week) {
 		$filename = $this->get_filename($day_of_week);
-		if (is_file($filename) && filemtime($filename) > strtotime('last ' . date('l'))) {
+		if (is_file($filename) && filemtime($filename) >= mktime(0, 0, 0, date('n'), date('j')-6)) {
 			return trim(file_get_contents($filename));
 		} else {
 			return false;

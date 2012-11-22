@@ -35,7 +35,7 @@ class RandomPicker {
 		$total_weight = 0;
 
 		foreach ($options as $selection => $weight) {
-			if ($weighted_index >= $total_weight && $weighted_index <= $total_weight + $weight) {
+			if ($weighted_index <= $total_weight + $weight) {
 				return $selection;
 			}
 
