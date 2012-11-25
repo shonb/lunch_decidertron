@@ -3,19 +3,27 @@ require_once(__DIR__ . "/simpledailyrecorder.php");
 require_once(__DIR__ . "/randompicker.php");
 
 class LunchDecidertron {
+	private $record_dir;
 	private $options;
 
 	// TODO: Move to config
 	const RECORD_DIR = '/home/robin/lunch/';
 
+	public function __construct($config_file) {
+		if (is_file($config_file)) {
+			include($config_file);
+
+			$this->record_dir = $config_record_dir;
+			$this->options = $config_options;
+		}
+	}
+
 	public function choose_todays_lunch_place() {
 		$day_of_week = date('l');
-		$recorder = new SimpleDailyRecorder(self::RECORD_DIR);
+		$recorder = new SimpleDailyRecorder($this->record_dir);
 		$place = $recorder->get_record($day_of_week);
 
 		if (empty($place)) {
-			$this->load_options();
-
 			$picker = new RandomPicker($this->options);
 
 			$yesterdays_pick = $recorder->get_record(date('l', strtotime('last weekday')));
@@ -34,26 +42,6 @@ class LunchDecidertron {
 	}
 
 	public function get_options() {
-		if (empty($this->options)) {
-			$this->load_options();
-		}
-
 		return $this->options;
-	}
-
-	private function load_options() {
-		if (empty($this->options)) {
-			// TODO: Move to config
-			$this->options = array(
-				'Peko Peko' => 75,
-				'Rocket Pizza' => 50,
-				'Not All There' => 100,
-				'Cafe 434' => 100,
-				'Blue Moose' => 100,
-				'Soup Place' => 10,
-				'Next to Soup Place' => 10,
-				'Orient East' => 100,
-			);
-		}
 	}
 }
