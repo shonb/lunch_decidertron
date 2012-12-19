@@ -1,3 +1,7 @@
+<img src="resources/logo.png" alt="Logo" />
+
+<h1>Lunch Decidertron</h1>
+
 <h3>Options</h3>
 <table border=1>
 	<tr>
@@ -23,6 +27,8 @@ function show() {
 	if (i == max) {
 		sel.firstChild.data = "<?php echo $selected; ?>";
 		clearInterval(interval);
+
+		document.getElementById('overwriteForm').style.display = "block";
 	}
 	else {
 		sel.firstChild.data += '.';
@@ -30,6 +36,20 @@ function show() {
 	i++;
 }
 
+function confirm_overwrite() {
+	return confirm("Are you sure? Misuse of this feature carries a penalty of paying for everyone's lunch for 1 week!");
+}
+
 var interval = setInterval("show()", 500);
 
 </script>
+
+
+<div id="overwriteForm" style="display:none;">
+<form method="post" onsubmit="return confirm_overwrite();">
+<input type="hidden" name="overwrite" value="1" />
+<input type="submit" value="Choose Again" />
+</form>
+
+<p>Last time someone shamelessly clicked this button: <?php echo $last_overwrite; ?></p>
+</div>

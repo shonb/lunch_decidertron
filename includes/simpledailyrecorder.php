@@ -1,7 +1,10 @@
 <?php
 
 class SimpleDailyRecorder {
+	const OVERWRITE_FILENAME = 'overwrite';
+
 	private $dir;
+
 
 	public function __construct($dir) {
 		$this->dir = $dir;
@@ -22,8 +25,22 @@ class SimpleDailyRecorder {
 	public function record($day_of_week, $value) {
 		file_put_contents($this->get_filename(date('l')), $value);
 	}
-	
+
+	public function flag_overwrite() {
+		$filename = $this->get_overwrite_flag_filename();
+		touch($filename);
+	}
+
+	public function get_last_overwrite_time() {
+		$filename = $this->get_overwrite_flag_filename();
+		return is_file($filename) ? filemtime($filename) : false;
+	}
+
 	private function get_filename($day_of_week) {
 		return $this->dir . $day_of_week;
+	}
+
+	private function get_overwrite_flag_filename() {
+		return $this->dir . self::OVERWRITE_FILENAME;
 	}
 }

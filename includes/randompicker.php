@@ -18,6 +18,11 @@ class RandomPicker {
 		$this->ignored_list[] = $ignore;
 	}
 
+	public function count_available_options() {
+		$available_options = $this->get_available_options();
+		return count($available_options);
+	}
+
 	private function get_available_options() {
 		$options = $this->options;
 		if (is_array($this->ignored_list)) {

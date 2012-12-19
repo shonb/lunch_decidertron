@@ -2,7 +2,5 @@
 require_once(__DIR__ . "/includes/lunchdecidertron.php");
 
 $decider = new LunchDecidertron('./includes/config_melb.php');
-$options = $decider->get_options();
-$selected = $decider->choose_todays_lunch_place();
 
-include(__DIR__ . '/tpl.php');
+include(__DIR__ . '/index_all.php');
